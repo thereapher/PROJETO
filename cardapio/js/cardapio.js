@@ -1,18 +1,4 @@
-const item = document.getElementById('teste');
-const fundoCarinho = document.getElementById('fundocarrinho');  
-const carrinho = document.getElementById('carrinho');      
-const fundoMenu = document.getElementById('fundomenu');   
-const menu = document.getElementById('menu');
-const pizza = document.getElementById('pizza');
-const borda = document.getElementById('borda');
-const tamanho = document.getElementById('tamanho');
-const retirarIngrediente = document.getElementById('retirar-ingrediente');
-const addCart = document.getElementById('addcart');
-const fecharMenu = document.getElementById('fecharmenu'); 
-const fecharCarrinho = document.getElementById('fecharcarrinho');
-const finalizarPedido = document.getElementById('finalizarpedido');
 
-const cardapio = document.getElementById("cardapio");
 
 
 cardapio.addEventListener("click", (event) => {
