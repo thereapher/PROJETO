@@ -14,20 +14,51 @@ const Endereco = document.querySelector('.endereco');
 const Total = document.querySelector('.total');
 const finalizar = document.querySelector('.btn-finalizar');
 const Cardapio = document.querySelector('.imagens');
-const pizza = document.querySelector('.item');
+const pizza = document.querySelectorAll('.item');
+const preco = document.querySelector('.preco')
+const btnta = document.querySelector('.btnta')
+const ItemCarrinho = [];
+
 
 Cardapio.addEventListener('click', (event) => {
-    if (event.target.closest('.item')) {
+    let parant = event.target.closest('.item');
+    if (parant) {
         fundomenu.style.display = 'flex';
-        let foto = event.target.closest('.item').querySelector('img').src.split('/').pop();
-        let nome = event.target.closest('.item').querySelector('p').textContent;
-        let preco = event.target.closest('.item').getAtribute('data-precogrande');
-        menu.insertAdjacentHTML('beforeend', `<div>
-                    <img src="fotos cardapio/${foto}" alt="" class="pizza-imagem">
+        const foto = parant.querySelector('img').getAttribute('src');
+        const nome = parant.querySelector('img').getAttribute('data-pizza');
+        const ValorPIzza = parant.querySelector('img').getAttribute('data-precogrande');
+        
+        itensPizza.innerHTML = '';
+        const div = document.createElement('div');
+        div.innerHTML = `<div>
+                    <img src="${foto}" alt="" class="pizza-imagem">
                 </div>
-                <h2 class="pizza-nome">PIZZA: ${nome}</h2>`);
-    }
+                <h2 class="pizza-nome">${nome}</h2>`
+        itensPizza.appendChild(div);
 
+        preco.innerHTML = ''
+        const addpreco = document.createElement('div')
+        addpreco.innerHTML = `<div>
+                    <p>Total</p>
+                    <h3>${ValorPIzza}</h3>
+                    </div>`
+        preco.appendChild(addpreco)
+}
+}
+);
+
+document.querySelectorAll('.btntamanho').forEach(btn => {
+    btn.addEventListener('click', function() {
+    document.querySelectorAll('.btntamanho').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    });
+});
+
+document.querySelectorAll('.btninteira').forEach(btn => {
+    btn.addEventListener('click', function() {
+    document.querySelectorAll('.btninteira').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    });
 });
 
 fundomenu.addEventListener('click', (event) => {
@@ -38,11 +69,19 @@ fundomenu.addEventListener('click', (event) => {
 
 fecharMenu.addEventListener('click', () => {
     fundomenu.style.display = 'none';
+
 });
 
 AddCart.addEventListener('click', () => {
     FundoCarrinho.style.display = 'flex';
     fundomenu.style.display = 'none';
+    ItemCarrinho.push({
+        nome: itensPizza.querySelector('.pizza-nome').textContent,
+        tamanho: tamanho.value,
+        borda: borda.value,
+        preco: itensPizza.querySelector('.pizza-imagem').getAttribute('data-precogrande'),
+    });
+    console.log(ItemCarrinho);
 });
 
 FundoCarrinho.addEventListener('click', (event) => {
