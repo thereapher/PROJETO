@@ -9,6 +9,7 @@ body {
 .cabecalho {
 width: 100%;
 height: 100px;
+margin-left: 10px;
 align-items: center;
 display: flex;
 justify-content: center;
@@ -20,6 +21,7 @@ justify-content: center;
   line-height: 1;
   margin-top: 50px;
   margin-left: 20px;
+  text-align: center;
 }
 
 .titulo span {
@@ -41,15 +43,15 @@ justify-content: center;
 
 .imagens {
   
-  display: grid;
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
 }
 
 .imagens img {
-  max-width: 100%;
-    border-radius: 5px;
+    max-width: 100%;
+    border-radius: 15px;
     object-fit: cover;
     max-height: 200px;
     width: 100%;
@@ -58,6 +60,15 @@ justify-content: center;
     justify-content: center;
     align-items: center;
     contain: content;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.8s;
+    position: relative;
+}
+
+.imagens img:hover {
+  transform: scale(1.1);
+  z-index: 1;
 }
 
 .item {
@@ -76,9 +87,97 @@ justify-content: center;
 
 
 #logo_montarini {
-    width: 100px;
+    width: 130px;
     margin: 0 auto;
+     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
+
+#logo_montarini:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+}
+
+@media (max-width: 1200px) {
+  .cabecalho {
+    height: 80px;
+  }
+  .titulo {
+    font-size: 20px;
+    margin-top: 30px;
+  }
+  .imagens {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .imagens img {
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 992px) {
+  .cabecalho {
+    height: 60px;
+  }
+  .titulo {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  .imagens {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  .imagens img {
+    max-height: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cabecalho {
+    height: 40px;
+  }
+  .titulo {
+    font-size: 16px;
+    margin-top: 10px;
+    
+  }
+  .imagens {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+  .imagens img {
+    max-height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cabecalho {
+    height: 30px;
+  }
+
+  #logo_montarini {
+    width: 100px;
+    margin-top: 40px;
+    margin-right: 30px;
+  }
+
+  .titulo {
+    font-size: 14px;
+    margin-top: 50px;
+    margin-right: 40px;
+  }
+
+  .titulo span {
+  display: inline-block;
+  margin-left: 3px;
+  }
+
+  .imagens {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
+
+  .imagens img {
+    max-height: 100px;
+  }
+}
+
 .fundomenu{
     background-color: #00000057;
     width: 100%;
@@ -124,7 +223,7 @@ justify-content: center;
 
         & .pizza-imagem{
           max-width: 100%;
-          border-radius: 5px;
+          border-radius: 15px;
           object-fit: cover;
           max-height: 250px;
           width: 400px;
@@ -329,6 +428,87 @@ justify-content: center;
         }
         }
 
+     @media (max-width: 1200px) {
+  .fundomenu .menu {
+    flex-direction: column;
+    align-items: center;
+  }
+  .fundomenu .menu .pizza {
+    width: 100%;
+    max-width: 100%;
+  }
+  .fundomenu .menu .divisao {
+    display: none;
+  }
+  .fundomenu .menu #selecao {
+    width: 100%;
+    margin-right: 60px;
+    text-align: center;
+    max-width: 100%;
+  }
+  .fundomenu .menu #borda {
+    width: 100%;
+    max-width: 100%;
+  }
+  .fundomenu .menu #retirar {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .fundomenu .menu .pizza-imagem {
+    max-height: 180px;
+  }
+  .fundomenu .menu .pizza-nome {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .fundomenu .menu .pizza-imagem {
+    max-height: 150px;
+    margin-top: 60px;
+  }
+  .fundomenu .menu .pizza-nome {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .fundomenu .menu .pizza-imagem {
+    max-height: 120px;
+  }
+  .fundomenu .menu .pizza-nome {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fundomenu .menu .pizza-imagem {
+    max-height: 100px;
+  }
+  .fundomenu .menu .pizza-nome {
+    font-size: 16px;
+  }
+  .fundomenu .menu #selecao {
+    width: 100%;
+    margin-right: 60px;
+    text-align: center;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .fundomenu .menu .pizza-imagem {
+    max-height: 80px;
+  }
+  .fundomenu .menu .pizza-nome {
+    font-size: 14px;
+  }
+}
+   
+
   .fundocarrinho{
     background-color: #0505056d;
     width: 100%;
@@ -511,5 +691,131 @@ justify-content: center;
       border: none;
       outline: none;
     }
+  }
+}
+
+@media (max-width: 1200px) {
+  .fundocarrinho .carrinho {
+    width: 90%;
+  }
+  .fundocarrinho .carrinho h1 {
+    font-size: 20px;
+  }
+  .fundocarrinho .carrinho .pizza-imagem {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+ .carrinho-pizza .item-carrinho {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  position: relative;
+}
+
+.carrinho-pizza .item-carrinho .pizza-imagem {
+  margin-right: 20px;
+}
+
+.carrinho-pizza .item-carrinho .infocarrinho {
+  margin-top: 0;
+}
+
+.carrinho-pizza .item-carrinho .remover-pizza {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: auto;
+  text-align: center;
+  font-size: 12px;
+  padding: 2px 5px;
+  max-width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+  .total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .total h2 {
+    margin-bottom: 10px;
+  }
+
+  .total select {
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .carrinho-pizza .item-carrinho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .carrinho-pizza .item-carrinho .pizza-imagem {
+    margin-right: 20px;
+  }
+
+  .carrinho-pizza .item-carrinho .infocarrinho {
+    margin-top: 0;
+  }
+
+  .carrinho-pizza .item-carrinho .remover-pizza {
+    margin-top: 0;
+  }
+
+  .total {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .total h2 {
+    margin-right: 20px;
+  }
+
+  .total select {
+    width: 50%;
+  }
+}
+
+
+@media (min-width: 1025px) {
+  .carrinho-pizza .item-carrinho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .carrinho-pizza .item-carrinho .pizza-imagem {
+    margin-right: 20px;
+  }
+
+  .carrinho-pizza .item-carrinho .infocarrinho {
+    margin-top: 0;
+  }
+
+  .carrinho-pizza .item-carrinho .remover-pizza {
+    margin-top: 0;
+  }
+
+  .total {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .total h2 {
+    margin-right: 20px;
+  }
+
+  .total select {
+    width: 50%;
   }
 }
