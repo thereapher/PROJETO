@@ -18,16 +18,22 @@ const pizza = document.querySelectorAll('.item');
 const preco = document.querySelector('.preco')
 const btnta = document.querySelector('.btnta')
 const ItemCarrinho = [];
+let ValorPIzzag = '';
+let ValorPIzzap = '';
+let precoatual = '';
 
 
-Cardapio.addEventListener('click', (event) => {
+
+Cardapio.addEventListener('click', (event ) => {
     let parant = event.target.closest('.item');
     if (parant) {
         fundomenu.style.display = 'flex';
         const foto = parant.querySelector('img').getAttribute('src');
         const nome = parant.querySelector('img').getAttribute('data-pizza');
-        const ValorPIzza = parant.querySelector('img').getAttribute('data-precogrande');
-        
+        ValorPIzzag = parant.querySelector('img').getAttribute('data-precogrande');
+        ValorPIzzap = parant.querySelector('img').getAttribute('data-precomedio');
+        precoAtual = ValorPIzzag; // Define o preço atual como o preço médio inicialmente
+
         itensPizza.innerHTML = '';
         const div = document.createElement('div');
         div.innerHTML = `<div>
@@ -36,16 +42,35 @@ Cardapio.addEventListener('click', (event) => {
                 <h2 class="pizza-nome">${nome}</h2>`
         itensPizza.appendChild(div);
 
-        preco.innerHTML = ''
-        const addpreco = document.createElement('div')
-        addpreco.innerHTML = `<div>
-                    <p>Total</p>
-                    <h3>${ValorPIzza}</h3>
-                    </div>`
-        preco.appendChild(addpreco)
+        colocarpreco()
 }
 }
 );
+
+function colocarpreco() {
+    preco.innerHTML = ''
+        const addpreco = document.createElement('div')
+        addpreco.innerHTML = `<div>
+                    <p>Total</p>
+                    <h3>${precoAtual}</h3>
+                    </div>`
+        preco.appendChild(addpreco)
+}
+
+document.querySelectorAll('.btntamanho').forEach(btn => {
+    btn.addEventListener('click', function () {
+        const tamanho = btn.getAttribute('data-tamanho');
+
+        if (tamanho === 'm') {
+            precoAtual = ValorPIzzap;
+        } else if (tamanho === 'g') {
+            precoAtual = ValorPIzzag;
+        }
+
+        colocarpreco();
+    });
+});
+
 
 document.querySelectorAll('.btntamanho').forEach(btn => {
     btn.addEventListener('click', function() {
@@ -77,9 +102,9 @@ AddCart.addEventListener('click', () => {
     fundomenu.style.display = 'none';
     ItemCarrinho.push({
         nome: itensPizza.querySelector('.pizza-nome').textContent,
-        tamanho: tamanho.value,
-        borda: borda.value,
-        preco: itensPizza.querySelector('.pizza-imagem').getAttribute('data-precogrande'),
+        tamanho: tamanho.querySelector('.btntamanho.active').textContent,
+        borda: borda.querySelector('select').value,
+        preco: precoatual = preco.querySelector('h3').textContent,
     });
     console.log(ItemCarrinho);
 });
