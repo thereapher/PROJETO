@@ -97,6 +97,9 @@ fecharMenu.addEventListener('click', () => {
 
 });
 
+//teste
+
+
 AddCart.addEventListener('click', () => {
     FundoCarrinho.style.display = 'flex';
     fundomenu.style.display = 'none';
