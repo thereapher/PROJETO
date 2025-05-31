@@ -22,6 +22,22 @@ let ValorPIzzag = '';
 let ValorPIzzap = '';
 let precoatual = '';
 
+window.onload = function(){
+    const itens = document.querySelectorAll('.bebida');
+
+    itens.forEach(item => {
+        const precoBebida = item.querySelector('[data-preco-bebida]');
+        const DOM = item.querySelector('.preco');
+
+        if(precoBebida && DOM){
+            const price = precoBebida.getAttribute('data-preco-bebida');
+            const realPrice = price.replace(',00', '');
+            DOM.textContent = realPrice;
+        } else {
+            return ; 
+        }
+    });
+}
 
 
 Cardapio.addEventListener('click', (event ) => {
@@ -98,7 +114,6 @@ fecharMenu.addEventListener('click', () => {
 });
 
 //teste
-
 
 AddCart.addEventListener('click', () => {
     FundoCarrinho.style.display = 'flex';
