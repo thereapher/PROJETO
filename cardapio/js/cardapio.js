@@ -17,6 +17,10 @@ const Cardapio = document.querySelector('.imagens');
 const pizza = document.querySelectorAll('.item');
 const preco = document.querySelector('.preco')
 const btnta = document.querySelector('.btnta')
+
+const buttonOpenCart = document.querySelector('[data-js="open-cart"');
+const categorias = document.querySelectorAll('[data-categoria]');
+
 const ItemCarrinho = [];
 let ValorPIzzag = '';
 let ValorPIzzap = '';
@@ -39,6 +43,17 @@ window.onload = function(){
     });
 }
 
+const openCart = () => {
+    const cart = document.querySelector('#fundocarrinho');
+    cart.style.display = 'flex';
+}
+
+buttonOpenCart.addEventListener('click', openCart);
+
+function filtroPorCategoria() {
+    const categoriaSelecionada = document.querySelector('#select-categoria');
+    
+};
 
 Cardapio.addEventListener('click', (event ) => {
     let parant = event.target.closest('.item');
@@ -112,6 +127,8 @@ fecharMenu.addEventListener('click', () => {
     fundomenu.style.display = 'none';
 
 });
+
+
 
 //teste
 
