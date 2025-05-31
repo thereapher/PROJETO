@@ -1,27 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background-color: #000000;
+  background-color: #0e0e0e;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
-#logo_montarini {
+/* #logo_montarini {
   width: 170px;
-}
+} */
 
-.cabecalho {
-width: 100%;
-height: 100px;
-margin-left: 10px;
-align-items: center;
-display: flex;
-justify-content: center;
-}
+/* .cabecalho {
+  width: 100%;
+  height: 100px;
+  padding: 1.5rem;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+} */
+
+/* .filtro{
+  width: 50px;
+  height: 2rem;
+  background: #00ff00;
+} */
 
 .titulo {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 16px;
   line-height: 1;
-  margin-top: 50px;
-  margin-left: 20px;
-  text-align: center;
+  margin-top: 2rem;
 }
 
 .titulo span {
@@ -42,16 +51,14 @@ justify-content: center;
 }
 
 .imagens {
-  
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    padding: 20px;
 }
 
 .imagens img {
     max-width: 100%;
-    border-radius: 15px;
+    border-radius: .35rem;
     object-fit: cover;
     max-height: 200px;
     width: 100%;
@@ -73,20 +80,24 @@ justify-content: center;
 
 .item {
   color: #ffffff;
-  text-align: center;
   margin-top: 20px;
   object-fit: cover;
   max-height: 200px;
 }
 
+.desc-item{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .item p {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 14px;
   margin-top: 10px;
 }
 
 
-#logo_montarini {
+/* #logo_montarini {
     width: 130px;
     margin: 0 auto;
      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
@@ -96,16 +107,13 @@ justify-content: center;
 #logo_montarini:hover {
     transform: scale(1.1);
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
-}
+} */
 
 @media (max-width: 1200px) {
-  .cabecalho {
-    height: 80px;
-  }
-  .titulo {
+  /* .titulo {
     font-size: 20px;
     margin-top: 30px;
-  }
+  } */
   .imagens {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
@@ -115,13 +123,10 @@ justify-content: center;
 }
 
 @media (max-width: 992px) {
-  .cabecalho {
-    height: 60px;
-  }
-  .titulo {
+  /* .titulo {
     font-size: 18px;
     margin-top: 20px;
-  }
+  } */
   .imagens {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
@@ -131,47 +136,39 @@ justify-content: center;
 }
 
 @media (max-width: 768px) {
-  .cabecalho {
-    height: 40px;
-  }
-  .titulo {
+  /* .titulo {
     font-size: 16px;
     margin-top: 10px;
     
-  }
-  .imagens {
+  } */
+  /* .imagens {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  }
+  } */
   .imagens img {
     max-height: 80px;
   }
 }
 
 @media (max-width: 480px) {
-  .cabecalho {
-    height: 30px;
-  }
 
-  #logo_montarini {
+  /* #logo_montarini {
     width: 100px;
-    margin-top: 40px;
-    margin-right: 30px;
-  }
+  } */
 
-  .titulo {
+  /* .titulo {
     font-size: 14px;
     margin-top: 50px;
     margin-right: 40px;
-  }
+  } */
 
-  .titulo span {
+  /* .titulo span {
   display: inline-block;
   margin-left: 3px;
-  }
+  } */
 
-  .imagens {
+  /* .imagens {
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  }
+  } */
 
   .imagens img {
     max-height: 100px;
@@ -234,7 +231,6 @@ justify-content: center;
         }
         & .pizza-nome{
           font-size: 35px;
-          font-weight: bold;
           color: #fafafa;
           margin-bottom: 10px;
           text-transform: uppercase;
@@ -269,7 +265,6 @@ justify-content: center;
 
         & h1{
           font-size: 20px;
-          font-weight: bold;
           color: #fdfcfc;
           margin-top: 30px;
         }
@@ -396,12 +391,10 @@ justify-content: center;
 
             & p{
               font-size: 15px;
-              font-weight: bold;
               color: #fafafa;
             }
             & h3{
               font-size: 40px;
-              font-weight: bold;
               color: #fcfafa;
               margin-top: -10px;
             }
@@ -410,7 +403,6 @@ justify-content: center;
           background-color: #fa0606;
           color: #fafafa;
           font-size: 1rem;
-          font-weight: bold;
           padding: 10px;
           width: 40%;
           border-radius: 5px;
@@ -530,7 +522,6 @@ justify-content: center;
 
     & h1{
       font-size: 30px;
-      font-weight: bold;
       color: #fafafa;
       top: 30px;
       margin-left: 20px;
@@ -593,7 +584,6 @@ justify-content: center;
             background-color: #fa0606;
             color: #fafafa;
             font-size: 1rem;
-            font-weight: bold;
             padding: 10px;
             width: 100%;
             border-radius: 5px;
@@ -622,7 +612,6 @@ justify-content: center;
     color: #fafafa;
     font-size: 20px;
     gap: 10px;
-    font-weight: bold;
 
     & select{
       width: 40%;
@@ -641,7 +630,6 @@ justify-content: center;
       background-color: #00ff00;
       color: #fafafa;
       font-size: 1em;
-      font-weight: bold;
       padding: 10px;
       width: 40%;
       border-radius: 5px;
@@ -678,7 +666,6 @@ justify-content: center;
     color: #000000;
     font-size: 20px;
     gap: 10px;
-    font-weight: bold;
 
     & input{
       width: 100%;

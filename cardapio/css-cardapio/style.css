@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --background: #0e0e0e;
+    --red: #c62828;
+    --red-active: #ac2020;
+    --background-input: #242424;
+}
+
+body{
+    background-color: var(--background);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 1rem;
+    color: #fff;
+}
+
+.cabecalho{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: center;
+    padding: 1.25rem 0;
+}
+
+.container{
+    margin-bottom: 3rem;
+}
+
+.logotipo_montarini{
+    width: 5rem;
+}
+
+.btn_cart, .select-categoria{
+    padding: 1rem;
+    display: flex;
+    gap: .5rem;
+    color: #fff;
+    background: var(--red);
+    border-radius: .5rem;
+    border: none;
+}
+
+.select-categoria{
+    padding: .5rem;
+}
+
+.btn_cart:active, .select-categoria:active{
+    background: var(--red-active);
+}
+
+.section-filtro{
+    margin-top: 4rem;
+}
+
+.filtro {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
+
+.filter{
+    width: 100%;
+    height: 1rem;
+    background-color: var(--background-input);
+    color: #fff;
+    border-radius: .5rem;
+    padding: .5rem;
+    display: flex;
+    gap: .5rem;
+}
+
+.filter_text{
+    font-size: 18px;
+    margin-bottom: .5rem;
+}
+
+.input_filter{
+    background: var(--background-input);
+    border: none;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    color: #fff;
+}
+
+.input_filter:active{
+    border: none;
+}
+
+.preco{
+    font-weight: bold;
+    font-size: 10px;
+    color: #bebebe;
+}
+
+/* menu de adição */
+.fundomenu{
+    background: var(--background-input);
+    
+}
