@@ -17,14 +17,9 @@ const Cardapio = document.querySelectorAll('.imagens');
 const pizza = document.querySelectorAll('.item');
 const preco = document.querySelector('.preco')
 const btnta = document.querySelector('.btnta')
-<<<<<<< HEAD
 
 const buttonOpenCart = document.querySelector('[data-js="open-cart"');
-const categorias = document.querySelectorAll('[data-categoria]');
 
-=======
-const valorbebida = document.querySelector('#cardapio_bebidas .item').getAttribute('data-preco');
->>>>>>> refs/remotes/origin/main
 const ItemCarrinho = [];
 let ValorPIzzag = '';
 let ValorPIzzap = '';
@@ -56,7 +51,12 @@ buttonOpenCart.addEventListener('click', openCart);
 
 function filtroPorCategoria() {
     const categoriaSelecionada = document.querySelector('#select-categoria');
-    
+    const categorias = document.querySelectorAll('[data-categoria]');
+
+    categorias.forEach(categoria => {
+        const item = categoria.getAttribute('data-categoria');
+    });
+
 };
 
 Cardapio.forEach(item => {
