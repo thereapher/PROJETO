@@ -471,8 +471,16 @@
                 <i class="bi bi-x-lg"></i>
             </span>
             <div class="pizza" id="pizza">
-                <img src="" data-js="pizza-image" class="pizza-foto-legal">
-                <p data-js="pizza-name" class="pizza-nome-legal"></p>
+                <div data-js="half-pizza" class="d-flex gap-3">
+                    <img src="" data-js="pizza-image" class="pizza-foto-legal">
+                    <img src="" data-js="pizza-image-2" class="d-none pizza-foto-legal">
+                </div>
+                <div data-js="half-pizza" class="d-flex gap-3 align-items-center">
+                    <p data-js="pizza-name" class="pizza-nome-legal"></p>
+                    <span data-js="pizza-half-name" class="d-none">
+                        <p class="pizza-nome-legal"></p>
+                    </span>
+                </div>
                 <p>Ingredientes: <span data-js="ingredientes"></span></p>
             </div>
             <hr class="divisao"></hr>
@@ -486,8 +494,8 @@
 
                     <h4 class="mb-2 title_section">Eaí, vai de meia ou inteira?</h4>
                     <div class="btnin gap-3 justify-content-between d-flex">
-                        <button id="inteira" class="btninteira btn col-12 justify-content-center active" data-js="all-or-half">Inteira</button>
-                        <button id="meia" class="btninteira btn col-12 justify-content-center" data-js="all-or-half">Meia</button>
+                        <button id="inteira" class="btninteira btn col-12 justify-content-center active" data-half="inteira">Inteira</button>
+                        <button id="meia" class="btninteira btn col-12 justify-content-center" data-half="meia">Meia</button>
                     </div>
                     <p class="explanation d-none" data-js="half-choose">* Ao escolher meio-a-meio será considerado o valor cheio do sabor mais caro.</p>
                 </div>
@@ -588,7 +596,7 @@
                     </h2>
                 </div>
     
-                <button id="finalizar-pedido" class="btn-finalizar"><i class="bi bi-whatsapp"></i> Enviar Pedido</button>
+                <button id="finalizar-pedido" class="btn-finalizar mb-3"><i class="bi bi-whatsapp"></i> Enviar Pedido</button>
             </div>
         </div>
     </div>
