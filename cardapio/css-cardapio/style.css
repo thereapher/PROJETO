@@ -1,13 +1,16 @@
 *{
     margin: 0;
     padding: 0;
+    border: none;
+    font-weight: normal;
 }
 
 :root{
     --background: #0e0e0e;
     --red: #c62828;
     --red-active: #ac2020;
-    --background-input: #242424;
+    --background-input: #232323;
+
 }
 
 body{
@@ -43,15 +46,25 @@ button, select {
     width: 5rem;
 }
 
-.btn_cart, .select-categoria{
+.btn_cart, .select-categoria, .btn, .btn.active{
     padding: 1rem;
-    display: flex;
     gap: .5rem;
     color: #fff;
-    background: var(--red);
     border-radius: .5rem;
     border: none;
+    outline: none;
 }
+
+.btn_cart, .select-categoria, .btn.active{
+    background-color: var(--red);
+}
+
+.btn{
+    background: none;
+    border: 2px solid var(--red);
+    color: var(--red);
+}
+
 
 .select-categoria{
     padding: .5rem;
@@ -102,9 +115,64 @@ button, select {
 
 .preco{
     font-weight: bold;
-    font-size: 10px;
+    font-size: 20px;
     color: #bebebe;
+    display: flex;
+    flex-direction: column;
 }
+
+.flex-direction-column{
+    flex-direction: column;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.d-block{
+    display: block;
+}
+
+.d-none{
+    display: none;
+}
+
+.gap-3{
+    gap: 1rem;
+}
+
+.mb-2{
+    margin-bottom: .5rem;
+}
+
+.mb-3{
+    margin-bottom: 1rem;
+}
+
+.me-2{
+    margin-right: .5rem;
+}
+
+.m-auto{
+    margin: 0 auto;
+}
+
+.justify-content-between{
+    justify-content: space-between;
+}
+
+.justify-content-center{
+    justify-content: center;
+}
+
+.col-12{
+    width: 100%;
+}
+
+.text-center{
+    text-align: center;
+}
+
 
 /* menu de adição */
 .fundomenu{
@@ -121,6 +189,7 @@ button, select {
 .menu{
     width: 100%;
     padding: 1.5rem 2rem;
+    overflow-y: auto;
 }
 
 .fecharmenu{
@@ -131,7 +200,121 @@ button, select {
 }
 
 .pizza-foto-legal{
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.pizza-nome-legal{
+    font-size: 1.5rem
+}
+
+.divisao{
+    width: 100%;
+    height: 1px;
+    background-color: var(--red);
+    margin: 1rem 0;
+}
+
+.borda{
+    margin-top: 2rem;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.w-30{
+    width: 30%;
+}
+
+.w-70{
+    width: 68%;
+}
+
+.retirar{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+}
+
+.select{
+    background: var(--background);
+    padding: 1rem;
+    outline: none;
+    border-radius: .5rem;
+    padding: 1rem;
+    color: #fff;
+}
+
+.select:active{
+    background: #050505;
+}
+
+.title_section{
+    color: #c0c0c0;
+}
+
+.explanation{
+    font-size: 12px;
+    margin: .5rem 0;
+}
+
+.fundocarrinho{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow-y: auto;
+    left: 0px;
+    top: 0px;
+    background-color: var(--background-input);
+}
+
+.carrinho{
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pizza-carrinho{
+    width: 120px;
+    height: 120px;
+}
+
+.pizza-carrinho img{
+    border-radius: 10px;
+}
+
+.remover-pizza.active{
+    padding: .2rem;
+    border-radius: .1rem;
+}
+
+.align-items-center{
+    align-items: center;
+}
+
+.total{
+    flex-direction: column;
+    align-items: start;
+}
+
+.input_cart{
+    background: var(--background);
+    border-radius: .5rem;
+    outline: none;
+    color: #fff;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.endereco-carrinho{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .2rem;
+    justify-content: space-between;
 }

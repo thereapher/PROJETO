@@ -505,7 +505,7 @@ button, select {
 } */
    
 
-  .fundocarrinho{
+  /* .fundocarrinho{
     background-color: #0505056d;
     width: 100%;
     height: 100%;
@@ -606,38 +606,20 @@ button, select {
         }
       }
     }
-  }
+  } */
   .total{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
     color: #fafafa;
-    font-size: 20px;
-    gap: 10px;
-
-    & select{
-      width: 40%;
-      height: 40px;
-      border-radius: 10px;
-      background-color: #868686;
-      color: #ffffff;
-      font-size: 16px;
-      padding: 5px;
-      border: none;
-      outline: none;
-      margin-left: 20px;
-    }
   }
 .btn-finalizar{
-      background-color: #00ff00;
+      background-color: #189148;
       color: #fafafa;
       font-size: 1em;
       padding: 10px;
       width: 40%;
       border-radius: 5px;
-      border: solid 4px #00ff1e;
+      border: solid 4px #189148;
       margin: 0 auto;
       display: block;
       width: 100%;
@@ -647,20 +629,18 @@ button, select {
         cursor: pointer;
         transition: 0.3s;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        border: solid 4px #00ff1e;
+        border: solid 4px #189148;
         font-size: 1.3rem;
       }
 }
 .endereco{
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   width: 100%;
-  margin-top: -30px;
+  margin-top: 30px;
   color: #fafafa;
 
-  & .endereco-carrinho{
+  /* & .endereco-carrinho{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -682,11 +662,11 @@ button, select {
       border: none;
       outline: none;
     }
-  }
+  } */
 }
 
 @media (max-width: 1200px) {
-  .fundocarrinho .carrinho {
+  /* .fundocarrinho .carrinho {
     width: 90%;
   }
   .fundocarrinho .carrinho h1 {
@@ -695,11 +675,11 @@ button, select {
   .fundocarrinho .carrinho .pizza-imagem {
     width: 50px;
     height: 50px;
-  }
+  } */
 }
 
 @media (max-width: 768px) {
- .carrinho-pizza .item-carrinho {
+ /* .carrinho-pizza .item-carrinho {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -725,7 +705,7 @@ button, select {
   max-width: 100px;
   overflow: hidden;
   white-space: nowrap;
-}
+} */
 
   .total {
     display: flex;
@@ -743,7 +723,7 @@ button, select {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .carrinho-pizza .item-carrinho {
+  /* .carrinho-pizza .item-carrinho {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -759,7 +739,7 @@ button, select {
 
   .carrinho-pizza .item-carrinho .remover-pizza {
     margin-top: 0;
-  }
+  } */
 
   .total {
     display: flex;
@@ -778,7 +758,7 @@ button, select {
 
 
 @media (min-width: 1025px) {
-  .carrinho-pizza .item-carrinho {
+  /* .carrinho-pizza .item-carrinho {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -794,7 +774,7 @@ button, select {
 
   .carrinho-pizza .item-carrinho .remover-pizza {
     margin-top: 0;
-  }
+  } */
 
   .total {
     display: flex;

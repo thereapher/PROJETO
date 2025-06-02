@@ -15,16 +15,25 @@ const Endereco = document.querySelector('.endereco');
 const Total = document.querySelector('.total');
 const finalizar = document.querySelector('.btn-finalizar');
 const Cardapio = document.querySelectorAll('.imagens');
-const pizza = document.querySelectorAll('.item');
+const pizza = document.querySelectorAll('.item img');
 const preco = document.querySelector('#preco')
 const btnta = document.querySelector('.btnta')
 const valorbebida = document.querySelector('#cardapio_bebidas .item').getAttribute('data-preco');
 const btnremover = document.querySelector('.remover')
 
-const buttonOpenCart = document.querySelector('[data-js="open-cart"');
+const buttonOpenCart = document.querySelectorAll('[data-js="open-cart"]');
 const selectFilter = document.querySelector('#select-categoria');
 const categorias = document.querySelectorAll('[data-categoria]');
-const inputFilter = document.querySelector('#input_filter')
+const inputFilter = document.querySelector('#input_filter');
+const precoMenu = document.querySelector('[data-js="final-price"]');
+const btnSize = document.querySelectorAll('[data-tamanho]');
+const selectBorder = document.querySelector('#select-border');
+const buttonAddCart = document.querySelector('#adicionar-carrinho');
+
+const select_payment = document.querySelector('#pagamento');
+const payment_form = document.querySelector('[data-js="payment_form"]');
+
+const allOrHalf = document.querySelectorAll('[data-js="all-or-half]');
 
 const ItemCarrinho = [];
 // Preços das pizzas
@@ -50,17 +59,9 @@ window.onload = function(){
     });
 
     abrirMenu();
+    closeMenu();
+    verificarInteira();
 }
-// Função para abrir o menu de pizza
-const openCart = () => {
-    const cart = document.querySelector('#fundocarrinho');
-    cart.style.display = 'flex';
-}
-
-buttonOpenCart.addEventListener('click', openCart);
-// filtro por categoria
-function filtroPorCategoria() {
-    const categoriaSelecionada = document.querySelector('#select-categoria');
 
 function filtroPorCategoria () {
     const categoriaSelecionada = document.querySelector('#select-categoria').value;
@@ -96,25 +97,52 @@ function filtroPorNome () {
 
 inputFilter.addEventListener('input', filtroPorNome);
 
+function atualizarPrecoPizza() {
+    const botaoTamanhoAtivo = document.querySelector('.btntamanho.active');
+    if (!botaoTamanhoAtivo) return;
+
+    const tamanho = botaoTamanhoAtivo.getAttribute('data-tamanho');
+    const valorBorda = parseFloat(selectBorder.value) || 0;
+
+    let valorPizza = 0;
+
+    if (tamanho === 'grande') {
+        valorPizza = parseFloat(precoPizzaGrande.replace('R$', '').replace(',', '.'));
+    } else if (tamanho === 'medio') {
+        valorPizza = parseFloat(precoPizzaMedia.replace('R$', '').replace(',', '.'));
+    }
+
+    const precoTotal = valorPizza + valorBorda;
+    precoMenu.innerText = `R$ ${precoTotal.toFixed(2).replace('.', ',')}`;
+}
+
+function verificarInteira(){
+    console.log(allOrHalf);
+
+    allOrHalf.forEach(button => {
+        button.addEventListener('click', function() {
+            console.log('teste')
+        });
+    })
+}
+
+btnSize.forEach(btn => {
+    btn.addEventListener('click', function() {
+        btnSize.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        atualizarPrecoPizza();
+    });
+});
+
+selectBorder.addEventListener('change', atualizarPrecoPizza);
+
 const abrirMenu = () => {
     pizza.forEach(item => {
-        item.addEventListener('click', () => {
-    });
-
-};
-// abre o menu de pizza ao clicar em uma pizza
-Cardapio.forEach(item => {
-    item.addEventListener('click', (event ) => {
-        let parant = event.target.closest('.item');
-        if (parant) {
-            fundomenu.style.display = 'flex';
-
-            fecharMenu.addEventListener('click', () => {fundomenu.style.display = 'none'});
-
-            const fotoPizza = item.querySelector('[data-img]').getAttribute('data-img');
-            const nomePizza = item.querySelector('[data-img]').getAttribute('data-pizza');
-            const precoPizzaGrande = item.querySelector('[data-img]').getAttribute('data-precogrande');
-            const precoPizzaMedia = item.querySelector('[data-img]').getAttribute('data-precomedio');
+        item.addEventListener('click', function() {
+            const fotoPizza = this.getAttribute('src');
+            const nomePizza = this.getAttribute('data-pizza');
+            precoPizzaGrande = this.getAttribute('data-precogrande');
+            precoPizzaMedia = this.getAttribute('data-precomedio');
 
             const pizzaImage = document.querySelector('[data-js="pizza-image"]');
             const pizzaName = document.querySelector('[data-js="pizza-name"]');
@@ -122,117 +150,21 @@ Cardapio.forEach(item => {
             pizzaImage.setAttribute('src', fotoPizza);
             pizzaName.innerHTML= nomePizza;
 
+            btnSize.forEach(b => b.classList.remove('active'));
+            document.querySelector('[data-tamanho="grande"]').classList.add('active');
+            atualizarPrecoPizza();
+            verificarInteira();
 
-
+            fundomenu.style.display = 'flex';
         });
     })
 };
 
-// Cardapio.forEach(item => {
-//     item.addEventListener('click', (event ) => {
-//         let parant = event.target.closest('.item');
-//         if (parant) {
-//             fundomenu.style.display = 'flex';
-//             const foto = parant.querySelector('img').getAttribute('src');
-//             const nome = parant.querySelector('img').getAttribute('data-pizza');
-//         ValorPIzzag = parant.querySelector('img').getAttribute('data-precogrande');
-//         ValorPIzzap = parant.querySelector('img').getAttribute('data-precomedio');
-//         precoAtual = ValorPIzzag; // Define o preço atual como o preço médio inicialmente
-
-//         itensPizza.innerHTML = '';
-//         const div = document.createElement('div');
-//         div.innerHTML = `<div>
-//                     <img src="${foto}" alt="" class="pizza-imagem">
-//                 </div>
-//                 <h2 class="pizza-nome">${nome}</h2>`
-//         itensPizza.appendChild(div);
-            const foto = parant.querySelector('img').getAttribute('src');
-            const nome = parant.querySelector('img').getAttribute('data-pizza');
-            ValorPIzzag = parant.querySelector('img').getAttribute('data-precogrande');
-            ValorPIzzap = parant.querySelector('img').getAttribute('data-precomedio');
-        precoAtual = ValorPIzzag; // Define o preço atual como o preço médio inicialmente
-        // colocar os dados da pizza no menu
-        itensPizza.innerHTML = '';
-        const div = document.createElement('div');
-        div.innerHTML = `<div>
-                    <img src="${foto}" alt="" class="pizza-imagem">
-                </div>
-                <h2 class="pizza-nome">${nome}</h2>`
-        itensPizza.appendChild(div);
-
-        colocarpreco();
-        
+const closeMenu = () =>{
+    fundomenu.style.display = 'none';
 }
 
-}
-);});
-// Função para colocar o preço no menu
-//         colocarpreco()
-// }
-// }
-// );});
-
-function colocarpreco() {
-    preco.innerHTML = ''
-    let fistchild = preco.firstChild;
-        const addpreco = document.createElement('div')
-        addpreco.classList.add('preco');
-        addpreco.innerHTML = `
-                    <p>Total</p>
-                    <h3>${precoAtual}</h3>
-                    `
-    preco.insertBefore(addpreco, fistchild);
-        //AddCart.insertBefore(addpreco, fistchild)
-}
-// colocar o preço correto no menu
-document.querySelectorAll('.btntamanho').forEach(btn => {
-    btn.addEventListener('click', function () {
-        const tamanho = btn.getAttribute('data-tamanho');
-
-        if (tamanho === 'm') {
-            precoAtual = ValorPIzzap;
-        } else if (tamanho === 'g') {
-            precoAtual = ValorPIzzag;
-        }
-
-        colocarpreco();
-    });
-});
-
-// botão clicado do tamanho
-document.querySelectorAll('.btntamanho').forEach(btn => {
-    btn.addEventListener('click', function() {
-    document.querySelectorAll('.btntamanho').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-    });
-});
-// botão clicado inteira
-document.querySelectorAll('.btninteira').forEach(btn => {
-    btn.addEventListener('click', function() {
-    document.querySelectorAll('.btninteira').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-    });
-});
-// fechar menu
-fundomenu.addEventListener('click', (event) => {
-    if (event.target === fundomenu) {
-        fundomenu.style.display = 'none';
-    }
-});
-
-// fundomenu.addEventListener('click', (event) => {
-//     if (event.target === fundomenu) {
-//         fundomenu.style.display = 'none';
-//     }
-// });
-
-// fecharMenu.addEventListener('click', () => {
-//     fundomenu.style.display = 'none';
-
-// });
-
-
-
+fecharMenu.addEventListener('click', () => {closeMenu()}); 
 //adicionar pizza ao carrinho
 
 // AddCart.addEventListener('click', () => {
@@ -244,11 +176,23 @@ fundomenu.addEventListener('click', (event) => {
 //         tamanho: tamanho.querySelector('.btntamanho.active').textContent,
 //         borda: borda.querySelector('select').value,
 //         preco: precoatual = preco.querySelector('h3').textContent,
-        inteira: document.querySelector('.btninteira.active').textContent
+        // inteira: document.querySelector('.btninteira.active').textContent
 //     });
 //     console.log(ItemCarrinho);
 //     colocaritemCarrinho();
 // });
+
+const openCart = () => {
+    const cart = document.querySelector('#fundocarrinho');
+    cart.style.display = 'flex';
+}
+
+buttonOpenCart.forEach(button => {
+    button.addEventListener('click', () => {
+        openCart(); 
+        closeMenu();
+    });
+})
 
 function colocaritemCarrinho() {
     ItemCarrinho.forEach(item => {
@@ -279,6 +223,12 @@ FundoCarrinho.addEventListener('click', (event) => {
 FecharCarrinho.addEventListener('click', () => {
     FundoCarrinho.style.display = 'none';
 });
+
+select_payment.addEventListener('change', function(){
+    const options = this.options[this.selectedIndex].text;
+    payment_form.textContent = options;
+});
+
 // remover item do carrinho
 itensCarrinho.addEventListener('click', (event) => {
     if (event.target.classList.contains('remover-pizza')) {
@@ -288,7 +238,7 @@ itensCarrinho.addEventListener('click', (event) => {
         ItemCarrinho.splice(itemIndex, 1);
 
         if (ItemCarrinho.length === 0) {
-            itensCarrinho.innerHTML = '<p>Nenhum item no carrinho</p>';
+            itensCarrinho.innerHTML = '<p class="m-auto">Nenhum item no carrinho</p>';
         }
     }
 });
