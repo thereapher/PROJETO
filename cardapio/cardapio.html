@@ -30,11 +30,11 @@
                 </label>
 
                 <select name="categoria_pizza" class="select-categoria" id="select-categoria">
-                    <option value="#">Categorias</option>
-                    <option value="0">Clássicas</option>
-                    <option value="1">Premium</option>
-                    <option value="2">Doces</option>
-                    <option value="3">Bebidas</option>
+                    <option value="default">Categorias</option>
+                    <option value="classica">Clássicas</option>
+                    <option value="premium">Premium</option>
+                    <option value="doces">Doces</option>
+                    <option value="bebidas">Bebidas</option>
                 </select>
             </div>
         </section>
@@ -54,7 +54,6 @@
                     <div class="desc-item">
                         <p> A BOLONHESA</p>
                     </div>
-                    
                 </div>
 
                 <div class="item">
@@ -160,15 +159,6 @@
                     <p>DOIS QUEIJOS</p>
                 </div>
 
-<<<<<<< HEAD
-        <div class="item" style="display: none;">
-            <img src="fotos cardapio/" alt="ESCAROLA"
-            id="teste" data-pizza="ESCAROLA" data-img="fotocardapio/" data-precogrande="R$ 48,00"
-            data-precomedio="R$ 32,00"
-            >
-            <p>ESCAROLA</p>
-        </div>
-=======
                 <div class="item">
                     <img src="fotos cardapio/" alt="ESCAROLA"
                     id="teste" data-pizza="ESCAROLA" data-img="fotocardapio/kikinha.jpg" data-precogrande="R$ 48,00"
@@ -176,7 +166,6 @@
                     >
                     <p>ESCAROLA</p>
                 </div>
->>>>>>> 90b750b0e5e5d2efda5e9282444a63e710a887ac
 
                 <div class="item">
                     <img src="fotos cardapio/fiorucci.jpg" alt=""
@@ -276,30 +265,16 @@
             </section>
         </section>
 
-        <section class="categoria_pizza" data-categoria="premium">
+        <section class="categoria_pizza mt-pizza" data-categoria="premium">
             <h2 class="titulo">
                 <span>PIZZ</span>
                 <span>AS PRE</span>
                 <span>MIUM</span>
-<<<<<<< HEAD
-            </h1>
-        </div>
-    
-        <div class="imagens" id="cardapio_premium">
-            <div class="item" style="display: none;">
-                <img src="fotos cardapio/" alt=""
-                id="teste"data-pizza="MONTARINI" data-img="fotos cardapio/montarini.jpg" data-precogrande="R$ 50,00" 
-                data-precomedio="R$ 39,00">
-                <p>MONTARINI</p>
-                </div>
-                
-=======
             </h2>
-
+    
             <section class="pizzas imagens" id="cardapio_premium">
->>>>>>> 90b750b0e5e5d2efda5e9282444a63e710a887ac
-                <div class="item">
-                    <img src="fotos cardapio/montarini.jpg" alt=""
+                <div class="item" style="display: none;">
+                    <img src="fotos cardapio/" alt=""
                     id="teste"data-pizza="MONTARINI" data-img="fotos cardapio/montarini.jpg" data-precogrande="R$ 50,00" 
                     data-precomedio="R$ 39,00">
                     <p>MONTARINI</p>
@@ -361,17 +336,10 @@
                     <p>QUATRO QUEIJOS</p>
                 </div>
 
-<<<<<<< HEAD
                 <div class="item" style="display: none;">
                 <img src="fotos cardapio/" alt=""
                 id="teste" data-pizza="SALAME COBERTO" data-img="fotos cardapio/salame_coberto.jpg" data-precogrande="R$ 50,00"
                 data-precomedio="R$ 37,00"> 
-=======
-                <div class="item">
-                    <img src="fotos cardapio/salame_coberto.jpg" alt=""
-                    id="teste" data-pizza="SALAME COBERTO" data-img="fotos cardapio/salame_coberto.jpg" data-precogrande="R$ 50,00"
-                    data-precomedio="R$ 37,00"> 
->>>>>>> 90b750b0e5e5d2efda5e9282444a63e710a887ac
                     <p>SALAME COBERTO</p>
                 </div>
 
@@ -391,7 +359,7 @@
             </section>
         </section>
 
-        <section class="categoria_pizza" data-categoria="doces">
+        <section class="categoria_pizza mt-pizza" data-categoria="doces">
             <h2 class="titulo">
                 <span>PIZ</span>
                 <span>ZAS DO</span>
@@ -450,28 +418,14 @@
             </section>
         </section>
 
-        <section class="categoria_pizza" data-categoria="bebidas">
+        <section class="categoria_pizza mt-pizza" data-categoria="bebidas">
             <h2 class="titulo">
                 <span>BE</span></span>
                 <span>BID</span>
                 <span>AS</span>
             </h2>
 
-<<<<<<< HEAD
-    <div class="bebidas imagens" id="cardapio_bebidas">
-=======
-            <section class="pizzas imagens" id="cardapio_bebidas">
-                <div class="item bebida">
-                    <img src="fotos cardapio/coca_cola.jpg" alt=""
-                    id="teste" data-bebida="COCA-COLA" data-img="fotos cardapio/coca_cola.jpg" data-preco-bebida="R$ 15,00">
-                    <div class="desc-item">
-                        <p>COCA-COLA</p>
-                        <p class="preco"></p>
-                    </div>
-                    
-                </div>
->>>>>>> 90b750b0e5e5d2efda5e9282444a63e710a887ac
-
+            <section class="bebidas imagens" id="cardapio_bebidas">
                 <div class="item bebida">
                     <img src="fotos cardapio/fanta.jpg" alt=""
                     id="teste" data-bebida="FANTA" data-img="fotos cardapio/fanta.jpg" data-preco-bebida="R$ 13,00"> 
@@ -511,12 +465,14 @@
         </section>
     </main>
 
-    <!-- Adicionar pedido ao carrinho! -->
-    <div class="fundomenu">
+     <div class="fundomenu">
         <div class="menu">
-            <span class="fecharmenu">&times;</span>
+            <span class="fecharmenu">
+                <i class="bi bi-x-lg"></i>
+            </span>
             <div class="pizza" id="pizza">
-                
+                <img src="" data-js="pizza-image" class="pizza-foto-legal">
+                <p data-js="pizza-name" class="pizza-nome-legal"></p>
             </div>
             <div class="divisao"></div>
             <div id="selecao">

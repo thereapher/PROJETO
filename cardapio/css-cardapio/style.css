@@ -17,6 +17,14 @@ body{
     color: #fff;
 }
 
+button, select {
+    cursor: pointer;
+}
+
+.mt-pizza{
+    margin-top: 5rem;
+}
+
 .cabecalho{
     width: 100%;
     height: auto;
@@ -101,5 +109,29 @@ body{
 /* menu de adição */
 .fundomenu{
     background: var(--background-input);
-    
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    display: none;
+    z-index: 999;
+}
+
+.menu{
+    width: 100%;
+    padding: 1.5rem 2rem;
+}
+
+.fecharmenu{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.pizza-foto-legal{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
 }

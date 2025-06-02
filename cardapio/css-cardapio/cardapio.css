@@ -8,6 +8,10 @@ body {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+button, select {
+  cursor: pointer;
+}
+
 /* #logo_montarini {
   width: 170px;
 } */
@@ -175,7 +179,7 @@ body {
   }
 }
 
-.fundomenu{
+/* .fundomenu{
     background-color: #00000057;
     width: 100%;
     height: 100%;
@@ -446,18 +450,18 @@ body {
     width: 100%;
     max-width: 100%;
   }
-}
+} */
 
-@media (max-width: 992px) {
+/* @media (max-width: 992px) {
   .fundomenu .menu .pizza-imagem {
     max-height: 180px;
   }
   .fundomenu .menu .pizza-nome {
     font-size: 22px;
   }
-}
+} */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .fundomenu .menu .pizza-imagem {
     max-height: 150px;
     margin-top: 60px;
@@ -465,18 +469,18 @@ body {
   .fundomenu .menu .pizza-nome {
     font-size: 20px;
   }
-}
+} */
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .fundomenu .menu .pizza-imagem {
     max-height: 120px;
   }
   .fundomenu .menu .pizza-nome {
     font-size: 18px;
   }
-}
+} */
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .fundomenu .menu .pizza-imagem {
     max-height: 100px;
   }
@@ -498,7 +502,7 @@ body {
   .fundomenu .menu .pizza-nome {
     font-size: 14px;
   }
-}
+} */
    
 
   .fundocarrinho{

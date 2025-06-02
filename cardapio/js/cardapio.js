@@ -17,8 +17,12 @@ const Cardapio = document.querySelectorAll('.imagens');
 const pizza = document.querySelectorAll('.item');
 const preco = document.querySelector('.preco')
 const btnta = document.querySelector('.btnta')
+const valorbebida = document.querySelector('#cardapio_bebidas .item').getAttribute('data-preco');
 
 const buttonOpenCart = document.querySelector('[data-js="open-cart"');
+const selectFilter = document.querySelector('#select-categoria');
+const categorias = document.querySelectorAll('[data-categoria]');
+const inputFilter = document.querySelector('#input_filter')
 
 const ItemCarrinho = [];
 let ValorPIzzag = '';
@@ -40,6 +44,8 @@ window.onload = function(){
             return ; 
         }
     });
+
+    abrirMenu();
 }
 
 const openCart = () => {
@@ -49,39 +55,87 @@ const openCart = () => {
 
 buttonOpenCart.addEventListener('click', openCart);
 
-function filtroPorCategoria() {
-    const categoriaSelecionada = document.querySelector('#select-categoria');
+function filtroPorCategoria () {
+    const categoriaSelecionada = document.querySelector('#select-categoria').value;
     const categorias = document.querySelectorAll('[data-categoria]');
 
     categorias.forEach(categoria => {
         const item = categoria.getAttribute('data-categoria');
-    });
 
+        if(categoriaSelecionada === "default" || item === categoriaSelecionada){
+            categoria.style.display = 'grid';
+        } else {
+            categoria.style.display = 'none';
+        }
+    });
 };
 
-Cardapio.forEach(item => {
-    item.addEventListener('click', (event ) => {
-        let parant = event.target.closest('.item');
-        if (parant) {
+selectFilter.addEventListener('change', filtroPorCategoria);
+
+function filtroPorNome () {
+    const busca = document.querySelector('#input_filter').value.toLowerCase();
+    const itens = document.querySelectorAll('.item');
+
+    itens.forEach(item => {
+        const name = item.querySelector('.item > p')?.textContent.toLowerCase() || '';
+
+        if(name.includes(busca)) {
+            item.style.display = 'grid'
+        } else {
+            item.style.display = 'none'
+        }
+    })
+}
+
+inputFilter.addEventListener('input', filtroPorNome);
+
+const abrirMenu = () => {
+    pizza.forEach(item => {
+        item.addEventListener('click', () => {
             fundomenu.style.display = 'flex';
-            const foto = parant.querySelector('img').getAttribute('src');
-            const nome = parant.querySelector('img').getAttribute('data-pizza');
-        ValorPIzzag = parant.querySelector('img').getAttribute('data-precogrande');
-        ValorPIzzap = parant.querySelector('img').getAttribute('data-precomedio');
-        precoAtual = ValorPIzzag; // Define o preço atual como o preço médio inicialmente
 
-        itensPizza.innerHTML = '';
-        const div = document.createElement('div');
-        div.innerHTML = `<div>
-                    <img src="${foto}" alt="" class="pizza-imagem">
-                </div>
-                <h2 class="pizza-nome">${nome}</h2>`
-        itensPizza.appendChild(div);
+            fecharMenu.addEventListener('click', () => {fundomenu.style.display = 'none'});
 
-        colocarpreco()
-}
-}
-);});
+            const fotoPizza = item.querySelector('[data-img]').getAttribute('data-img');
+            const nomePizza = item.querySelector('[data-img]').getAttribute('data-pizza');
+            const precoPizzaGrande = item.querySelector('[data-img]').getAttribute('data-precogrande');
+            const precoPizzaMedia = item.querySelector('[data-img]').getAttribute('data-precomedio');
+
+            const pizzaImage = document.querySelector('[data-js="pizza-image"]');
+            const pizzaName = document.querySelector('[data-js="pizza-name"]');
+
+            pizzaImage.setAttribute('src', fotoPizza);
+            pizzaName.innerHTML= nomePizza;
+
+
+
+        });
+    })
+};
+
+// Cardapio.forEach(item => {
+//     item.addEventListener('click', (event ) => {
+//         let parant = event.target.closest('.item');
+//         if (parant) {
+//             fundomenu.style.display = 'flex';
+//             const foto = parant.querySelector('img').getAttribute('src');
+//             const nome = parant.querySelector('img').getAttribute('data-pizza');
+//         ValorPIzzag = parant.querySelector('img').getAttribute('data-precogrande');
+//         ValorPIzzap = parant.querySelector('img').getAttribute('data-precomedio');
+//         precoAtual = ValorPIzzag; // Define o preço atual como o preço médio inicialmente
+
+//         itensPizza.innerHTML = '';
+//         const div = document.createElement('div');
+//         div.innerHTML = `<div>
+//                     <img src="${foto}" alt="" class="pizza-imagem">
+//                 </div>
+//                 <h2 class="pizza-nome">${nome}</h2>`
+//         itensPizza.appendChild(div);
+
+//         colocarpreco()
+// }
+// }
+// );});
 
 function colocarpreco() {
     preco.innerHTML = ''
@@ -122,34 +176,34 @@ document.querySelectorAll('.btninteira').forEach(btn => {
     });
 });
 
-fundomenu.addEventListener('click', (event) => {
-    if (event.target === fundomenu) {
-        fundomenu.style.display = 'none';
-    }
-});
+// fundomenu.addEventListener('click', (event) => {
+//     if (event.target === fundomenu) {
+//         fundomenu.style.display = 'none';
+//     }
+// });
 
-fecharMenu.addEventListener('click', () => {
-    fundomenu.style.display = 'none';
+// fecharMenu.addEventListener('click', () => {
+//     fundomenu.style.display = 'none';
 
-});
+// });
 
 
 
 //teste
 
-AddCart.addEventListener('click', () => {
-    FundoCarrinho.style.display = 'flex';
-    fundomenu.style.display = 'none';
-    ItemCarrinho.push({
-        nome: itensPizza.querySelector('.pizza-nome').textContent,
-        img: itensPizza.querySelector('.pizza-imagem').getAttribute('src'),
-        tamanho: tamanho.querySelector('.btntamanho.active').textContent,
-        borda: borda.querySelector('select').value,
-        preco: precoatual = preco.querySelector('h3').textContent,
-    });
-    console.log(ItemCarrinho);
-    colocaritemCarrinho();
-});
+// AddCart.addEventListener('click', () => {
+//     FundoCarrinho.style.display = 'flex';
+//     fundomenu.style.display = 'none';
+//     ItemCarrinho.push({
+//         nome: itensPizza.querySelector('.pizza-nome').textContent,
+//         img: itensPizza.querySelector('.pizza-imagem').getAttribute('src'),
+//         tamanho: tamanho.querySelector('.btntamanho.active').textContent,
+//         borda: borda.querySelector('select').value,
+//         preco: precoatual = preco.querySelector('h3').textContent,
+//     });
+//     console.log(ItemCarrinho);
+//     colocaritemCarrinho();
+// });
 
 function colocaritemCarrinho() {
     ItemCarrinho.forEach(item => {
