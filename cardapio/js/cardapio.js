@@ -37,6 +37,7 @@ const allOrHalf = document.querySelectorAll('[data-half]');
 const halfChoose = document.querySelector('[data-js="half-choose"]');
 const halfName = document.querySelector('[data-js="pizza-half-name"]')
 const halfPizza = document.querySelector('[data-js="pizza-half-image"]')
+let namepizza = document.querySelector('[data-js="pizza-name"]');
 
 const ItemCarrinho = [];
 // Preços das pizzas
@@ -262,20 +263,45 @@ const closeMenu = () =>{
 fecharMenu.addEventListener('click', () => {closeMenu()}); 
 //adicionar pizza ao carrinho
 
-// AddCart.addEventListener('click', () => {
-//     FundoCarrinho.style.display = 'flex';
-//     fundomenu.style.display = 'none';
-//     ItemCarrinho.push({
-//         nome: itensPizza.querySelector('.pizza-nome').textContent,
-//         img: itensPizza.querySelector('.pizza-imagem').getAttribute('src'),
-//         tamanho: tamanho.querySelector('.btntamanho.active').textContent,
-//         borda: borda.querySelector('select').value,
-//         preco: precoatual = preco.querySelector('h3').textContent,
-        // inteira: document.querySelector('.btninteira.active').textContent
-//     });
-//     console.log(ItemCarrinho);
-//     colocaritemCarrinho();
-// });
+AddCart.addEventListener('click', () => {
+    FundoCarrinho.style.display = 'flex';
+    fundomenu.style.display = 'none';
+
+    let existe = ItemCarrinho.find(item => item.nome === itensPizza.querySelector('[data-js="pizza-name"]').textContent &&
+    item.tamanho === tamanho.querySelector('.btntamanho.active').textContent &&
+    item.borda === borda.querySelector('#select-border option:checked').textContent &&
+    item.preco === precoatual &&
+    item.inteira === document.querySelector('.btninteira.active').textContent
+    );
+    if (!existe){
+    ItemCarrinho.push({
+        nome: itensPizza.querySelector('[data-js="pizza-name"]').textContent,
+        img: itensPizza.querySelector('[data-js="pizza-image"]').getAttribute('src'),
+        tamanho: tamanho.querySelector('.btntamanho.active').textContent,
+        borda: borda.querySelector('#select-border option:checked').textContent,
+        preco: precoatual = preco.querySelector('[data-js="final-price"]').textContent,
+        inteira: document.querySelector('.btninteira.active').textContent,
+        quantidade: 1 
+    });
+    console.log(ItemCarrinho);
+}
+else{
+    existe.quantidade += 1;
+    console.log('Item já existe no carrinho, quantidade atualizada para:', existe.quantidade);
+
+}
+
+
+    if(ItemCarrinho.length > 1) {
+            let clone = itensCarrinho.querySelector('.item-carrinho').cloneNode(true);
+                    itensCarrinho.appendChild(clone);
+            
+        }
+//!existe ? colocaritemCarrinho() : console.log('Item já existe no carrinho');
+
+colocaritemCarrinho();
+
+});
 
 const openCart = () => {
     const cart = document.querySelector('#fundocarrinho');
@@ -291,22 +317,20 @@ buttonOpenCart.forEach(button => {
 
 function colocaritemCarrinho() {
     ItemCarrinho.forEach(item => {
-        const cart = document.createElement('div');
-        cart.classList.add('item-carrinho');
-        cart.innerHTML = `
-                    <div class="pizza-imagem"><img src="${item.img}" alt=""></div>
-                    <div class="infocarrinho">
-                        <strong>Pizza de ${item.nome}</strong><br>
-                        Tamanho: ${item.tamanho}<br>
-                        Borda: ${item.borda}<br>
-                        Valor: ${item.preco}
-                        Inteira: ${item.inteira}
-                    </div>
-                    <div class="remover">
-                        <button class="remover-pizza">Remover</button>
-                    </div>
-                `;
-        itensCarrinho.appendChild(cart);
+        let image = document.querySelector('[data-js="img_cart"]');
+        let name = document.querySelector('[data-js="name_cart"]');
+        let size = document.querySelector('[data-js="size_cart"]');
+        let border = document.querySelector('[data-js="border_cart"]');
+        let valor = document.querySelector('[data-js="valor_cart"]');
+        let quantidade = document.querySelector('[data-js="quantidade_cart"]');
+
+        image.textContent = item.img;
+        name.textContent = item.nome;
+        size.textContent = item.tamanho;
+        border.textContent = item.borda;
+        valor.textContent = item.preco;
+        quantidade.textContent = item.quantidade;
+
     });
 }
 //fechar carrinho
