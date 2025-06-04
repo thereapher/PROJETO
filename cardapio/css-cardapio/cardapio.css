@@ -100,9 +100,8 @@ button, select {
   margin-top: 10px;
 }
 
-
-/* #logo_montarini {
-    width: 130px;
+* #logo_montarini {
+    width: 100px;
     margin: 0 auto;
      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
     transition: transform 0.3s ease, filter 0.3s ease;
@@ -111,7 +110,7 @@ button, select {
 #logo_montarini:hover {
     transform: scale(1.1);
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
-} */
+} 
 
 @media (max-width: 1200px) {
   /* .titulo {
