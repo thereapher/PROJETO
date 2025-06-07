@@ -70,7 +70,7 @@ window.onload = function(){
 
     closeMenu();
     selectPizza();
-    activeHalfPizza();
+    verificarInteira();
 }
 
 function filtroPorCategoria () {
@@ -126,30 +126,44 @@ function atualizarPrecoPizza() {
     precoMenu.innerText = `R$ ${precoTotal.toFixed(2).replace('.', ',')}`;
 }
 
-function verificarInteira(){
-    allOrHalf.forEach(button => {
-        button.addEventListener('click', function() {
-            const isPizza = this.getAttribute('data-half')
-            document.querySelectorAll(`[data-half]`).forEach(btn => {
-                btn.classList.remove('active');
-            });
+function verificarInteira() {
+    const inteira = document.querySelector('.btninteira[data-half="inteira"]');
+    const meia = document.querySelector('.btninteira[data-half="meia"]');
+    const selectSaborMeio = document.querySelector('.select-sabor-meio');
+    const pizzaHalfName = document.querySelector('[data-js="pizza-half-name"]');
+    const pizzaImages = document.querySelectorAll('.pizza-foto-legal');
+    const explanation = document.querySelector('[data-js="half-choose"]');
 
-            this.classList.add('active');
+    if (!inteira || !meia) {
+        console.error('Botões de inteira/meia não encontrados');
+        return;
+    }
 
-            if(isPizza === "meia"){
-                halfChoose.classList.remove('d-none');
-                halfName.classList.remove('d-none');
-                halfPizza.classList.remove('d-none');
+    inteira.addEventListener('click', () => {
+        inteira.classList.add('active');
+        meia.classList.remove('active');
+        selecionandoMeia = false;
+        selectSaborMeio.style.display = 'none';
+        pizzaHalfName.style.display = 'none';
+        pizzaImages[1].style.display = 'none';
+        explanation.classList.add('d-none');
+        saborMeia1 = null;
+        saborMeia2 = null;
+        atualizarPrecoPizza();
+    });
 
-            } else{
-                halfChoose.classList.add('d-none');
-                halfName.classList.add('d-none');
-                halfPizza.classList.add('d-none');
-            }
-
-
-        });
-    })
+    meia.addEventListener('click', () => {
+        meia.classList.add('active');
+        inteira.classList.remove('active');
+        selecionandoMeia = true;
+        selectSaborMeio.style.display = 'block';
+        pizzaHalfName.style.display = 'block';
+        pizzaImages[1].style.display = 'block';
+        explanation.classList.remove('d-none');
+        saborMeia1 = null;
+        saborMeia2 = null;
+        atualizarPrecoPizza();
+    });
 }
 
 btnSize.forEach(btn => {
@@ -162,29 +176,81 @@ btnSize.forEach(btn => {
 
 selectBorder.addEventListener('change', atualizarPrecoPizza);
 
-const abrirMenu = () => {
-    pizza.forEach(item => {
-        item.addEventListener('click', function() {
-            const fotoPizza = this.getAttribute('src');
-            const nomePizza = this.getAttribute('data-pizza');
-            precoPizzaGrande = this.getAttribute('data-precogrande');
-            precoPizzaMedia = this.getAttribute('data-precomedio');
+function selectPizza() {
+    const pizzas = document.querySelectorAll('.item img');
+    const selectSaborMeio = document.querySelector('.select-sabor-meio');
+    const pizzaHalfName = document.querySelector('[data-js="pizza-half-name"]');
+    const pizzaImages = document.querySelectorAll('.pizza-foto-legal');
+    const pizzaNomeLegal = document.querySelector('.pizza-nome-legal');
+    const ingredientes = document.querySelector('.ingredientes');
+    const fundomenu = document.querySelector('.fundomenu');
 
-            const pizzaImage = document.querySelector('[data-js="pizza-image"]');
-            const pizzaName = document.querySelector('[data-js="pizza-name"]');
+    pizzas.forEach(pizza => {
+        pizza.addEventListener('click', () => {
+            const nome = pizza.getAttribute('data-pizza');
+            const preco = pizza.getAttribute('data-precogrande');
+            const imagem = pizza.getAttribute('src');
+            const precoMedio = pizza.getAttribute('data-precomedio');
 
-            pizzaImage.setAttribute('src', fotoPizza);
-            pizzaName.innerHTML= nomePizza;
+            // Atualiza as variáveis globais
+            precoPizzaGrande = preco;
+            precoPizzaMedia = precoMedio;
 
-            btnSize.forEach(b => b.classList.remove('active'));
-            document.querySelector('[data-tamanho="grande"]').classList.add('active');
+            if (selecionandoMeia) {
+                if (!saborMeia1) {
+                    saborMeia1 = nome;
+                    pizzaImages[0].src = imagem;
+                    pizzaNomeLegal.textContent = nome;
+                    ingredientes.textContent = `Ingredientes: ${nome}`;
+                    
+                    // Atualiza o select com os outros sabores
+                    selectSaborMeio.innerHTML = '<option value="">Escolha o segundo sabor</option>';
+                    pizzas.forEach(p => {
+                        if (p.getAttribute('data-pizza') !== nome) {
+                            const option = document.createElement('option');
+                            option.value = p.getAttribute('data-pizza');
+                            option.textContent = p.getAttribute('data-pizza');
+                            option.dataset.preco = p.getAttribute('data-precogrande');
+                            option.dataset.imagem = p.getAttribute('src');
+                            selectSaborMeio.appendChild(option);
+                        }
+                    });
+                }
+            } else {
+                // Pizza inteira
+                pizzaImages[0].src = imagem;
+                pizzaImages[1].style.display = 'none';
+                pizzaNomeLegal.textContent = nome;
+                pizzaHalfName.style.display = 'none';
+                selectSaborMeio.style.display = 'none';
+                ingredientes.textContent = `Ingredientes: ${nome}`;
+            }
+
+            // Atualiza o preço
             atualizarPrecoPizza();
-            verificarInteira();
-
+            
+            // Mostra o menu
             fundomenu.style.display = 'flex';
         });
-    })
-};
+    });
+
+    selectSaborMeio.addEventListener('change', (e) => {
+        if (e.target.value) {
+            const option = e.target.options[e.target.selectedIndex];
+            saborMeia2 = e.target.value;
+            pizzaImages[1].src = option.dataset.imagem;
+            pizzaHalfName.textContent = e.target.value;
+            
+            // Calcula o preço baseado no sabor mais caro
+            const preco1 = parseFloat(precoPizzaGrande.replace('R$', '').replace(',', '.'));
+            const preco2 = parseFloat(option.dataset.preco.replace('R$', '').replace(',', '.'));
+            const preco = Math.max(preco1, preco2);
+            
+            // Atualiza o preço
+            precoMenu.innerText = `R$ ${preco.toFixed(2).replace('.', ',')}`;
+        }
+    });
+}
 
 function activeHalfPizza() {
     const botaoMeia = document.querySelector('[data-half="meia"]');
@@ -201,61 +267,6 @@ function activeHalfPizza() {
     });
 }
 
-function selectPizza() {
-    const pizzas = document.querySelectorAll('.item img');
-
-    pizzas.forEach(pizzaEl => {
-        pizzaEl.addEventListener('click', function () {
-            const nome = this.getAttribute('data-pizza');
-            const preco = parseFloat(this.getAttribute('data-precogrande').replace('R$', '').replace(',', '.'));
-            const imagem = this.getAttribute('src');
-
-            const pizzaImage = document.querySelector('[data-js="pizza-image"]');
-            const pizzaImage2 = document.querySelector('[data-js="pizza-image-2"]');
-            const pizzaName = document.querySelector('[data-js="pizza-name"]');
-
-            if (selecionandoMeia) {
-                if (!saborMeia1) {
-                    saborMeia1 = nome;
-                    precoMeia1 = preco;
-                    halfName.innerText = `1ª metade: ${saborMeia1}`;
-                    pizzaImage.setAttribute('src', imagem);
-                    pizzaImage2.style.display = 'none';
-                } else if (!saborMeia2 && nome !== saborMeia1) {
-                    saborMeia2 = nome;
-                    precoMeia2 = preco;
-
-                    const precoFinal = Math.max(precoMeia1, precoMeia2);
-                    precoMenu.innerText = `R$ ${precoFinal.toFixed(2).replace('.', ',')}`;
-
-                    pizzaName.innerText = `${saborMeia1}`;
-                    halfName.innerText = `e ${saborMeia2}`;
-                    pizzaImage2.setAttribute('src', imagem);
-                    pizzaImage2.style.display = 'inline-block';
-
-                    selecionandoMeia = false;
-                    fundomenu.style.display = 'flex';
-                }
-                return;
-            }
-
-            precoPizzaGrande = this.getAttribute('data-precogrande');
-            precoPizzaMedia = this.getAttribute('data-precomedio');
-
-            pizzaImage.setAttribute('src', imagem);
-            pizzaImage2.style.display = 'none';
-            pizzaName.innerText = nome;
-
-            btnSize.forEach(b => b.classList.remove('active'));
-            document.querySelector('[data-tamanho="grande"]').classList.add('active');
-
-            atualizarPrecoPizza();
-            verificarInteira();
-
-            fundomenu.style.display = 'flex';
-        });
-    });
-}
 const closeMenu = () =>{
     fundomenu.style.display = 'none';
 }
@@ -264,63 +275,82 @@ fecharMenu.addEventListener('click', () => {closeMenu()});
 //adicionar pizza ao carrinho
 
 AddCart.addEventListener('click', () => {
+    const isMeia = document.querySelector('.btninteira[data-half="meia"]').classList.contains('active');
+    const tamanhoAtivo = document.querySelector('.btntamanho.active').textContent;
+    const bordaSelecionada = document.querySelector('#select-border option:checked').textContent;
+    const precoAtual = document.querySelector('[data-js="final-price"]').textContent;
+    
+    if (isMeia && (!saborMeia1 || !saborMeia2)) {
+        alert('Por favor, selecione os dois sabores para a pizza meio a meio');
+        return;
+    }
+
     FundoCarrinho.style.display = 'flex';
     fundomenu.style.display = 'none';
 
-    let existe = ItemCarrinho.find(item => item.nome === itensPizza.querySelector('[data-js="pizza-name"]').textContent &&
-    item.tamanho === tamanho.querySelector('.btntamanho.active').textContent &&
-    item.borda === borda.querySelector('#select-border option:checked').textContent &&
-    item.preco === precoatual &&
-    item.inteira === document.querySelector('.btninteira.active').textContent
+    let nomePizza = '';
+    let imagemPizza = '';
+    let precoPizza = precoAtual;
+
+    if (isMeia) {
+        nomePizza = `${saborMeia1} / ${saborMeia2}`;
+        imagemPizza = document.querySelector('.pizza-foto-legal').src;
+    } else {
+        nomePizza = document.querySelector('.pizza-nome-legal').textContent;
+        imagemPizza = document.querySelector('.pizza-foto-legal').src;
+    }
+
+    let existe = ItemCarrinho.find(item => 
+        item.nome === nomePizza &&
+        item.tamanho === tamanhoAtivo &&
+        item.borda === bordaSelecionada
     );
 
-
-
-    if (!existe ) {
-    ItemCarrinho.push({
-        nome: itensPizza.querySelector('[data-js="pizza-name"]').textContent,
-        img: itensPizza.querySelector('[data-js="pizza-image"]').getAttribute('src'),
-        tamanho: tamanho.querySelector('.btntamanho.active').textContent,
-        borda: borda.querySelector('#select-border option:checked').textContent,
-        preco: precoatual = preco.querySelector('[data-js="final-price"]').textContent,
-        inteira: document.querySelector('.btninteira.active').textContent,
-        quantidade: 1 
-    });
-    console.log(ItemCarrinho);
-}
-else if (existe.inteira === 'meia'){
-    ItemCarrinho.push({
-        nome: itensPizza.querySelector('[data-js="pizza-name"]').textContent,
-        img: itensPizza.querySelector('[data-js="pizza-image"]').getAttribute('src'),
-        tamanho: tamanho.querySelector('.btntamanho.active').textContent,
-        borda: borda.querySelector('#select-border option:checked').textContent,
-        preco: precoatual = preco.querySelector('[data-js="final-price"]').textContent,
-        inteira: document.querySelector('.btninteira.active').textContent,
-        quantidade: 1 
-    });
-
-}
-else{
-    existe.quantidade += 1;
-    const precoExistente = existe.preco.replace("R$ ", "").replace(",", ".");
-    existe.preco = parseFloat(precoExistente) * existe.quantidade
-    
-
-}
-
+    if (!existe) {
+        ItemCarrinho.push({
+            nome: nomePizza,
+            img: imagemPizza,
+            tamanho: tamanhoAtivo,
+            borda: bordaSelecionada,
+            preco: precoPizza,
+            inteira: isMeia ? 'Meia' : 'Inteira',
+            quantidade: 1
+        });
+    } else {
+        existe.quantidade += 1;
+        const precoExistente = parseFloat(existe.preco.replace('R$ ', '').replace(',', '.'));
+        existe.preco = `R$ ${(precoExistente * existe.quantidade).toFixed(2).replace('.', ',')}`;
+    }
 
     if(ItemCarrinho.length > 1) {
-            let clone = itensCarrinho.querySelector('.item-carrinho').cloneNode(true);
-                    itensCarrinho.appendChild(clone);
-            
-        }
+        let clone = itensCarrinho.querySelector('.item-carrinho').cloneNode(true);
+        itensCarrinho.appendChild(clone);
+    }
 
-
-colocaritemCarrinho();
-
-
-
+    colocaritemCarrinho();
 });
+
+function colocaritemCarrinho() {
+    const itensCarrinho = document.querySelectorAll('.item-carrinho');
+    
+    ItemCarrinho.forEach((item, index) => {
+        if (itensCarrinho[index]) {
+            const image = itensCarrinho[index].querySelector('[data-js="img_cart"]');
+            const name = itensCarrinho[index].querySelector('[data-js="name_cart"]');
+            const size = itensCarrinho[index].querySelector('[data-js="size_cart"]');
+            const border = itensCarrinho[index].querySelector('[data-js="border_cart"]');
+            const valor = itensCarrinho[index].querySelector('[data-js="valor_cart"]');
+            const quantidade = itensCarrinho[index].querySelector('[data-js="quantidade_cart"]');
+
+            if (image) image.src = item.img;
+            if (name) name.textContent = item.nome;
+            if (size) size.textContent = item.tamanho;
+            if (border) border.textContent = item.borda;
+            if (valor) valor.textContent = item.preco;
+            if (quantidade) quantidade.textContent = item.quantidade;
+        }
+    });
+}
 
 const openCart = () => {
     const cart = document.querySelector('#fundocarrinho');
@@ -334,41 +364,9 @@ buttonOpenCart.forEach(button => {
     });
 })
 
-function colocaritemCarrinho() {
-    ItemCarrinho.forEach(item => {
-        let image = document.querySelector('[data-js="img_cart"]');
-        let name = document.querySelector('[data-js="name_cart"]');
-        let size = document.querySelector('[data-js="size_cart"]');
-        let border = document.querySelector('[data-js="border_cart"]');
-        let valor = document.querySelector('[data-js="valor_cart"]');
-        let quantidade = document.querySelector('[data-js="quantidade_cart"]');
-
-        image.textContent = item.img;
-        name.textContent = item.nome;
-        size.textContent = item.tamanho;
-        border.textContent = item.borda;
-        valor.textContent = item.preco;
-        quantidade.textContent = item.quantidade;
-
-    });
-}
-function colocaritemCarrinhoMeia() {
-    ItemCarrinho.forEach(item => {
-        let image = document.querySelector('[data-js="img_cart"]');
-        let name = document.querySelector('[data-js="name_cart"]');
-        let size = document.querySelector('[data-js="size_cart"]');
-        let border = document.querySelector('[data-js="border_cart"]');
-        let valor = document.querySelector('[data-js="valor_cart"]');
-        let quantidade = document.querySelector('[data-js="quantidade_cart"]');
-
-        image.textContent = item.img;
-        name.textContent = item.nome;
-        size.textContent = item.tamanho;
-        border.textContent = item.borda;
-        valor.textContent = item.preco;
-        quantidade.textContent = item.quantidade;
-
-    });
+function selecionarmeia(){
+    
+    
 }
 
 //fechar carrinho
@@ -409,4 +407,10 @@ finalizar.addEventListener('click', () => {
         
     }
 );
+
+// Adiciona a função para inicializar os eventos quando o documento estiver pronto
+document.addEventListener('DOMContentLoaded', () => {
+    verificarInteira();
+    selectPizza();
+});
 

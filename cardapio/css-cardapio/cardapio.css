@@ -221,33 +221,81 @@ button, select {
         justify-content: center;
         width: 50%;
 
-        & .pizza-imagem{
-          max-width: 100%;
-          border-radius: 15px;
-          object-fit: cover;
-          max-height: 250px;
-          width: 400px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          contain: content;
+        & .d-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        & .pizza-nome{
-          font-size: 35px;
-          color: #fafafa;
-          margin-bottom: 10px;
-          text-transform: uppercase;
-          
+
+        & .pizza-foto-legal {
+            max-width: 200px;
+            border-radius: 15px;
+            object-fit: cover;
+            max-height: 200px;
+            width: 200px;
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            contain: content;
+            margin: 0 10px;
+        }
+
+        & .select-sabor-meio {
+            width: 200px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: #585858;
+            color: #fafafa;
+            font-size: 16px;
+            padding: 5px;
+            border: none;
+            outline: none;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        & .select-sabor-meio option {
+            background-color: #585858;
+            color: #fafafa;
+            padding: 10px;
+        }
+
+        & .select-sabor-meio option:disabled {
+            background-color: #333;
+            color: #666;
+        }
+
+        & .pizza-nome-legal {
+            font-size: 24px;
+            color: #fafafa;
+            margin: 10px 0;
+            text-transform: uppercase;
+        }
+
+        & [data-js="pizza-half-name"] {
+            font-size: 20px;
+            color: #fafafa;
+            margin-left: 10px;
+            display: inline-block;
+        }
+
+        & .explanation {
+            font-size: 14px;
+            color: #fafafa;
+            margin-top: 10px;
+            font-style: italic;
         }
 
         & .ingredientes{
-          background-color: #797777;
-          font-size: 16px;
-          color: #fafafa;
-          margin-bottom: 10px;
-          padding: 10px;
-          width: 80%;
-          }
+            background-color: #797777;
+            font-size: 16px;
+            color: #fafafa;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 80%;
+        }
         }
       }
 
@@ -302,6 +350,8 @@ button, select {
                   border-radius: 8px;
                   padding: 10px 24px;
                   transition: background 0.2s, color 0.2s;
+                  width: 100%;
+                  text-align: center;
 
                   &:hover{
                     cursor: pointer;
@@ -788,4 +838,46 @@ button, select {
   .total select {
     width: 50%;
   }
+}
+
+.btninteira {
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+    cursor: pointer;
+    background: rgb(34, 34, 34);
+    border: 2px solid rgb(246, 8, 8);
+    border-radius: 8px;
+    padding: 10px 24px;
+    transition: background 0.2s, color 0.2s;
+    width: 100%;
+    text-align: center;
+}
+
+.btninteira:hover {
+    cursor: pointer;
+    transition: 0.3s;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: #fa0606;
+    color: #fafafa;
+}
+
+.btninteira.active {
+    background-color: #fa0606;
+    color: #fafafa;
+    border: solid 4px #fa0606;
+    transition: 0.3s;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.explanation {
+    font-size: 14px;
+    color: #fafafa;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.explanation.d-none {
+    display: none;
 }
