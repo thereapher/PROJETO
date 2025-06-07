@@ -16,7 +16,7 @@ const Total = document.querySelector('.total');
 const finalizar = document.querySelector('.btn-finalizar');
 const Cardapio = document.querySelectorAll('.imagens');
 const pizza = document.querySelectorAll('.item img');
-const preco = document.querySelector('#preco')
+//const preco = document.querySelector('#preco')
 const btnta = document.querySelector('.btnta')
 const valorbebida = document.querySelector('#cardapio_bebidas .item').getAttribute('data-preco');
 const btnremover = document.querySelector('.remover')
@@ -273,7 +273,10 @@ AddCart.addEventListener('click', () => {
     item.preco === precoatual &&
     item.inteira === document.querySelector('.btninteira.active').textContent
     );
-    if (!existe){
+
+
+
+    if (!existe ) {
     ItemCarrinho.push({
         nome: itensPizza.querySelector('[data-js="pizza-name"]').textContent,
         img: itensPizza.querySelector('[data-js="pizza-image"]').getAttribute('src'),
@@ -285,9 +288,23 @@ AddCart.addEventListener('click', () => {
     });
     console.log(ItemCarrinho);
 }
+else if (existe.inteira === 'meia'){
+    ItemCarrinho.push({
+        nome: itensPizza.querySelector('[data-js="pizza-name"]').textContent,
+        img: itensPizza.querySelector('[data-js="pizza-image"]').getAttribute('src'),
+        tamanho: tamanho.querySelector('.btntamanho.active').textContent,
+        borda: borda.querySelector('#select-border option:checked').textContent,
+        preco: precoatual = preco.querySelector('[data-js="final-price"]').textContent,
+        inteira: document.querySelector('.btninteira.active').textContent,
+        quantidade: 1 
+    });
+
+}
 else{
     existe.quantidade += 1;
-    console.log('Item já existe no carrinho, quantidade atualizada para:', existe.quantidade);
+    const precoExistente = existe.preco.replace("R$ ", "").replace(",", ".");
+    existe.preco = parseFloat(precoExistente) * existe.quantidade
+    
 
 }
 
@@ -297,9 +314,11 @@ else{
                     itensCarrinho.appendChild(clone);
             
         }
-//!existe ? colocaritemCarrinho() : console.log('Item já existe no carrinho');
+
 
 colocaritemCarrinho();
+
+
 
 });
 
@@ -333,6 +352,25 @@ function colocaritemCarrinho() {
 
     });
 }
+function colocaritemCarrinhoMeia() {
+    ItemCarrinho.forEach(item => {
+        let image = document.querySelector('[data-js="img_cart"]');
+        let name = document.querySelector('[data-js="name_cart"]');
+        let size = document.querySelector('[data-js="size_cart"]');
+        let border = document.querySelector('[data-js="border_cart"]');
+        let valor = document.querySelector('[data-js="valor_cart"]');
+        let quantidade = document.querySelector('[data-js="quantidade_cart"]');
+
+        image.textContent = item.img;
+        name.textContent = item.nome;
+        size.textContent = item.tamanho;
+        border.textContent = item.borda;
+        valor.textContent = item.preco;
+        quantidade.textContent = item.quantidade;
+
+    });
+}
+
 //fechar carrinho
 FundoCarrinho.addEventListener('click', (event) => {
     if (event.target === FundoCarrinho) {
