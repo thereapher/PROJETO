@@ -121,11 +121,10 @@ body {
   height: 3px;
   background-color: #e53935;
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.footer-left,
-.footer-right {
+.footer-left{
   margin: 10px;
 }
 
@@ -133,19 +132,6 @@ body {
   color: #e53935;
   display: inline-block;
   min-width: 90px;
-}
-
-.footer-right a {
-  color: #e53935;
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: 26px;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.footer-right a:hover {
-  color: #fff;
-  transform: scale(1.2);
 }
 
 @media (min-width: 992px) {
