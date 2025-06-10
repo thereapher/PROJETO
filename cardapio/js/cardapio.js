@@ -400,10 +400,19 @@ itensCarrinho.addEventListener('click', (event) => {
 
 // finalizar pedido
 finalizar.addEventListener('click', () => {
-    window.open(`https://wa.me/5511976393636?text=Olá! Gostaria de fazer um pedido: 
-        1 Pizza de Bolonhesa
-        Entregar em: ${Endereco.value}
-        Total: ${Total.value}`, '_blank');
+    const cartitens = ItemCarrinho.map((item) => {
+        return(
+            ` ${item.nome} Tamanho: ${item.tamanho} Borda :${item.borda} Preço: R$${item.preco} Inteira ${item.inteira} Quantidade: ${item.quantidade} |`
+        )
+    }).join('')
+
+    const mensagem = encodeURIComponent(cartitens)
+    const telefone = '5511976393636'
+    console.log(cartitens)
+    window.open(`https://wa.me/${telefone}?text=Olá! Gostaria de fazer um pedido: 
+        ${mensagem}
+       // Entregar em: ${Endereco.value}
+        //Total: ${Total.value}`, '_blank');
         
     }
 );
