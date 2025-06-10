@@ -39,7 +39,7 @@ button, select {
 
 .titulo span {
   display: inline-block;
-  margin-right: -4px;
+  margin-right: -7px;
 }
 
 .titulo span:nth-child(1) {
@@ -47,7 +47,7 @@ button, select {
 }
 
 .titulo span:nth-child(2) {
-  color: #fafafa 
+  color: rgba(255, 255, 255, 0.7)
 }
 
 .titulo span:nth-child(3) {
