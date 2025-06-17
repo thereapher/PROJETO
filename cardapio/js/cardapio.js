@@ -316,19 +316,42 @@ AddCart.addEventListener('click', () => {
             inteira: isMeia ? 'Meia' : 'Inteira',
             quantidade: 1
         });
+    const totalcart = ItemCarrinho.reduce((soma, item) => {
+    const valorLimpocart = item.preco.replace("R$ ", "").replace(",", ".");
+    return soma + parseFloat(valorLimpocart);
+}, 0);
+        let precocart = document.querySelector('[data-js="total_price"]')
+        precocart.innerHTML = totalcart
     } else {
         existe.quantidade += 1;
         const precoExistente = parseFloat(existe.preco.replace('R$ ', '').replace(',', '.'));
         existe.preco = `R$ ${(precoExistente * existe.quantidade).toFixed(2).replace('.', ',')}`;
+
+        const totalcart = ItemCarrinho.reduce((soma, item) => {
+    const valorLimpocart = item.preco.replace("R$ ", "").replace(",", ".");
+    return soma + parseFloat(valorLimpocart);
+}, 0);
+        let precocart = document.querySelector('[data-js="total_price"]')
+        precocart.innerHTML = totalcart;
+        
     }
 
     if(ItemCarrinho.length > 1) {
         let clone = itensCarrinho.querySelector('.item-carrinho').cloneNode(true);
         itensCarrinho.appendChild(clone);
     }
-
+    
     colocaritemCarrinho();
 });
+
+function attpreco(){
+    const totalcart = ItemCarrinho.reduce((soma, item) => {
+    const valorLimpocart = item.preco.replace("R$ ", "").replace(",", ".");
+    return soma + parseFloat(valorLimpocart);
+    })
+    let precocart =  document.querySelector('[data-js="total_price"]')
+    precocart = totalcart
+}
 
 function colocaritemCarrinho() {
     const itensCarrinho = document.querySelectorAll('.item-carrinho');
@@ -402,17 +425,36 @@ itensCarrinho.addEventListener('click', (event) => {
 finalizar.addEventListener('click', () => {
     const cartitens = ItemCarrinho.map((item) => {
         return(
-            ` ${item.nome} Tamanho: ${item.tamanho} Borda :${item.borda} Preço: R$${item.preco} Inteira ${item.inteira} Quantidade: ${item.quantidade} |`
+            ` ${item.nome} 
+            Tamanho: ${item.tamanho}
+            Borda: ${item.borda}
+            Preço: R$${item.preco}
+            ${item.inteira}
+            Quantidade: ${item.quantidade} |`
         )
     }).join('')
 
     const mensagem = encodeURIComponent(cartitens)
     const telefone = '5511976393636'
+    const rua = document.querySelector('#endereco').value
+    const numrua = document.querySelector('#numero').value
+    const complemento = document.querySelector('#complemento').value
+    const endereco = rua + ',' + numrua + ',' + complemento
+    const pessoa = document.querySelector('#nome_cliente').value
+    const formapagto = document.querySelector('#pagamento').value
+    const total = ItemCarrinho.reduce((soma, item) => {
+    const valorLimpo = item.preco.replace("R$ ", "").replace(",", ".");
+    return soma + parseFloat(valorLimpo);
+}, 0);
     console.log(cartitens)
-    window.open(`https://wa.me/${telefone}?text=Olá! Gostaria de fazer um pedido: 
-        ${mensagem}
-       // Entregar em: ${Endereco.value}
-        //Total: ${Total.value}`, '_blank');
+    window.open(`https://wa.me/${telefone}?text=Olá!sou o(a) ${pessoa}%0A
+        Gostaria de fazer um pedido:%0A
+        ${mensagem}%0A
+        Entregar em: ${endereco}%0A
+        Total: R$${total},00%0A
+        Forma De Pagamento: ${formapagto}%0A`,
+        '_blank');
+        
         
     }
 );
@@ -423,3 +465,4 @@ document.addEventListener('DOMContentLoaded', () => {
     selectPizza();
 });
 
+console.log()
