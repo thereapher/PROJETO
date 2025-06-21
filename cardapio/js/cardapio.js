@@ -423,46 +423,78 @@ itensCarrinho.addEventListener('click', (event) => {
 
 // finalizar pedido
 finalizar.addEventListener('click', () => {
-    const cartitens = ItemCarrinho.map((item) => {
-        return(
-            ` ${item.nome} 
-            Tamanho: ${item.tamanho}
-            Borda: ${item.borda}
-            Preço: R$${item.preco}
-            ${item.inteira}
-            Quantidade: ${item.quantidade} |`
-        )
-    }).join('')
+    const rua = document.querySelector('#endereco').value.trim();
+    const numrua = document.querySelector('#numero').value.trim();
+    const complemento = document.querySelector('#complemento').value.trim();
+    const endereco = `${rua}, ${numrua}, ${complemento}`;
 
-    const mensagem = encodeURIComponent(cartitens)
-    const telefone = '5511976393636'
-    const rua = document.querySelector('#endereco').value
-    const numrua = document.querySelector('#numero').value
-    const complemento = document.querySelector('#complemento').value
-    const endereco = rua + ',' + numrua + ',' + complemento
-    const pessoa = document.querySelector('#nome_cliente').value
-    const formapagto = document.querySelector('#pagamento').value
-    const total = ItemCarrinho.reduce((soma, item) => {
-    const valorLimpo = item.preco.replace("R$ ", "").replace(",", ".");
-    return soma + parseFloat(valorLimpo);
-}, 0);
-    console.log(cartitens)
-    window.open(`https://wa.me/${telefone}?text=Olá!sou o(a) ${pessoa}%0A
-        Gostaria de fazer um pedido:%0A
-        ${mensagem}%0A
-        Entregar em: ${endereco}%0A
-        Total: R$${total},00%0A
-        Forma De Pagamento: ${formapagto}%0A`,
-        '_blank');
-        
-        
+    const pessoa = document.querySelector('#nome_cliente').value.trim();
+    const formapagto = document.querySelector('#pagamento').value;
+
+    const isopen = horarioaberto();
+
+    if (!pessoa) {
+        alert("Por favor, informe seu nome.");
+        return;
     }
-);
+
+    if (!rua || !numrua) {
+        alert("Por favor, informe o endereço completo.");
+        return;
+    }
+
+    if (!formapagto || formapagto === "0") {
+        alert("Por favor, selecione a forma de pagamento.");
+        return;
+    }
+
+    if (!isopen) {
+        alert("Pedidos só podem ser feitos entre 18h e 00h.");
+        return;
+    }
+
+    if (ItemCarrinho.length === 0) {
+        alert("Seu carrinho está vazio.");
+        return;
+    }
+
+    const cartitens = ItemCarrinho.map(item => {
+        return ` ${item.nome} 
+        Tamanho: ${item.tamanho}
+        Borda: ${item.borda}
+        Preço: R$${item.preco}
+        ${item.inteira}
+        Quantidade: ${item.quantidade} |`;
+    }).join('');
+
+    const total = ItemCarrinho.reduce((soma, item) => {
+        const valorLimpo = item.preco.replace("R$ ", "").replace(",", ".");
+        return soma + parseFloat(valorLimpo);
+    }, 0).toFixed(2).replace('.', ',');
+
+    const mensagem = encodeURIComponent(`
+Olá! sou o(a) ${pessoa}
+Gostaria de fazer um pedido:
+${cartitens}
+Entregar em: ${endereco}
+Total: R$${total}
+Forma De Pagamento: ${formapagto}
+    `);
+
+    const telefone = '5511976393636';
+    window.open(`https://wa.me/${telefone}?text=${mensagem}`, '_blank');
+});
+
 
 // Adiciona a função para inicializar os eventos quando o documento estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
     verificarInteira();
     selectPizza();
 });
-
+function horarioaberto() {
+    const data = new Date();
+    const hora = data.getHours();
+    return hora>=18 && hora< 24;
+    
+}
 console.log()
