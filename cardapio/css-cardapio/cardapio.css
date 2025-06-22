@@ -851,13 +851,29 @@ button, select {
 .btninteira:hover {
     cursor: pointer;
     transition: 0.3s;
-    transform: scale(1.05);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     background-color: #fa0606;
     color: #fafafa;
 }
 
 .btninteira.active {
+    background-color: #fa0606;
+    color: #fafafa;
+    border: solid 4px #fa0606;
+    transition: 0.3s;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.btntamanho:hover {
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: #fa0606;
+    color: #fafafa;
+}
+
+.btntamanho.active{
     background-color: #fa0606;
     color: #fafafa;
     border: solid 4px #fa0606;
