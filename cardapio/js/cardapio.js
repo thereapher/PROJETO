@@ -191,6 +191,7 @@ function selectPizza() {
             const preco = pizza.getAttribute('data-precogrande');
             const imagem = pizza.getAttribute('src');
             const precoMedio = pizza.getAttribute('data-precomedio');
+            const ingrediente = pizza.getAttribute('data-ingrediente')
 
             // Atualiza as variáveis globais
             precoPizzaGrande = preco;
@@ -201,7 +202,7 @@ function selectPizza() {
                     saborMeia1 = nome;
                     pizzaImages[0].src = imagem;
                     pizzaNomeLegal.textContent = nome;
-                    ingredientes.textContent = `Ingredientes: ${nome}`;
+                    ingredientes.textContent = `Ingredientes: ${ingrediente}`;
                     
                     // Atualiza o select com os outros sabores
                     selectSaborMeio.innerHTML = '<option value="">Escolha o segundo sabor</option>';
@@ -223,7 +224,7 @@ function selectPizza() {
                 pizzaNomeLegal.textContent = nome;
                 pizzaHalfName.style.display = 'none';
                 selectSaborMeio.style.display = 'none';
-                ingredientes.textContent = `Ingredientes: ${nome}`;
+                ingredientes.textContent = `Ingredientes: ${ingrediente}`;
             }
 
             // Atualiza o preço
@@ -434,27 +435,79 @@ finalizar.addEventListener('click', () => {
     const isopen = horarioaberto();
 
     if (!pessoa) {
-        alert("Por favor, informe seu nome.");
+    Toastify({
+    text: "Por favor, informe o seu Nome",
+    duration: 1000,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+    background: "linear-gradient(to right,rgb(176, 18, 0),rgb(65, 14, 0))",
+    },
+}).showToast()
         return;
     }
 
     if (!rua || !numrua) {
-        alert("Por favor, informe o endereço completo.");
+        Toastify({
+    text: "Por favor, informe o endereço completo.",
+    duration: 1000,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+    background: "linear-gradient(to right,rgb(176, 18, 0),rgb(65, 14, 0))",
+    },
+}).showToast()
+        
         return;
     }
 
     if (!formapagto || formapagto === "0") {
-        alert("Por favor, selecione a forma de pagamento.");
+        Toastify({
+    text: "Por favor, selecione a forma de pagamento.",
+    duration: 1000,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+    background: "linear-gradient(to right,rgb(176, 18, 0),rgb(65, 14, 0))",
+    },
+}).showToast()
         return;
     }
 
     if (!isopen) {
-        alert("Pedidos só podem ser feitos entre 18h e 00h.");
+        Toastify({
+    text: "Pedidos só podem ser feitos entre 18h e 00h.",
+    duration: 2000,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+    background: "linear-gradient(to right,rgb(176, 18, 0),rgb(65, 14, 0))",
+    },
+}).showToast()
         return;
     }
 
     if (ItemCarrinho.length === 0) {
-        alert("Seu carrinho está vazio.");
+        Toastify({
+    text: "Seu carrinho está vazio.",
+    duration: 1000,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+    background: "linear-gradient(to right,rgb(176, 18, 0),rgb(65, 14, 0))",
+    },
+}).showToast()
+        
         return;
     }
 
